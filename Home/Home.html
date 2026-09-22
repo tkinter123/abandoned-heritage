@@ -1,1 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Home page</title>
+
+</head>
+
+<body>
+
+    <!-- BUTTON 1 -->
+    <button
+        class="button1"
+        onclick="travelTo('../Deep Space/Deep Space.html', this)">
+        CLICK ME
+    </button>
+
+
+    <!-- BUTTON 2 -->
+    <button
+        class="button2"
+        onclick="travelTo('../Mars/Mars.html', this)">
+        CLICK ME
+    </button>
+
+
+    <!-- BUTTON 3 -->
+    <button
+        class="button3"
+        onclick="travelTo('../Moon/Moon.html', this)">
+        CLICK ME
+    </button>
+
+
+    <!-- Light-speed effect -->
+    <div class="light-transition"></div>
+
+
+    <style>
+
+        /* ========================================
+   RESET
+   ======================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ========================================
+   PAGE
+   ======================================== */
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+
+/* ========================================
+   BACKGROUND
+   ======================================== */
+
+body {
+
+    background-image: url("Background5.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    position: relative;
+
+    /*
+     * JavaScript changes this dynamically
+     * to the clicked button's position.
+     */
+    transform-origin: center;
+}
+
+
+/* ========================================
+   COMMON BUTTON STYLE
+   ======================================== */
+
+.button1,
+.button2,
+.button3 {
+
+    position: absolute;
+
+    height: 30px;
+    width: 80px;
+
+    font-family: "Times New Roman", Times, serif;
+    color: aliceblue;
+
+    background-color: purple;
+
+    border: 2px solid purple;
+    border-radius: 20%;
+
+    filter: drop-shadow(0 0 10px purple);
+
+    cursor: pointer;
+
+    z-index: 10;
+
+    transition:
+        transform 0.3s ease,
+        filter 0.3s ease;
+}
+
+
+/* ========================================
+   BUTTON 1 POSITION
+   ======================================== */
+
+.button1 {
+
+    top: 465px;
+    left: 645px;
+}
+
+
+/* ========================================
+   BUTTON 2 POSITION
+   ======================================== */
+
+.button2 {
+
+    top: 469px;
+    left: 275px;
+}
+
+
+/* ========================================
+   BUTTON 3 POSITION
+   ======================================== */
+
+.button3 {
+
+    top: 469px;
+    left: 1020px;
+}
+
+
+/* ========================================
+   BUTTON HOVER
+   ======================================== */
+
+.button1:hover,
+.button2:hover,
+.button3:hover {
+
+    transform: scale(1.15);
+
+    filter: drop-shadow(0 0 18px purple);
+}
+
+
+/* ========================================
+   LIGHT TRANSITION
+   ======================================== */
+
+.light-transition {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    pointer-events: none;
+
+    /*
+     * Bright purple/white light.
+     */
+    background:
+        radial-gradient(
+            circle at center,
+            white 0%,
+            #ffffff 3%,
+            #d580ff 8%,
+            #8a2be2 18%,
+            #4b0082 35%,
+            navy 90%
+            transparent 65%
+        );
+
+    opacity: 0;
+
+    transform: scale(0);
+
+    transform-origin: center;
+
+    filter: blur(0);
+}
+
+
+/* ========================================
+   TRAVELLING MODE
+   ======================================== */
+
+body.travelling {
+
+    overflow: hidden;
+
+    /*
+     * The entire camera zooms forward.
+     */
+    animation:
+        cameraTravel 1.2s
+        cubic-bezier(0.7, 0, 1, 1)
+        forwards;
+}
+
+
+/*
+ * Make the objects rush toward
+ * the camera as well.
+ */
+
+body.travelling > *:not(.light-transition) {
+
+    animation:
+        objectsRush 1.2s
+        cubic-bezier(0.7, 0, 1, 1)
+        forwards;
+}
+
+
+/*
+ * Make the light expand.
+ */
+
+body.travelling .light-transition {
+
+    animation:
+        lightWarp 1.2s
+        cubic-bezier(0.7, 0, 1, 1)
+        forwards;
+}
+
+
+/* ========================================
+   CAMERA TRAVEL
+   ======================================== */
+
+@keyframes cameraTravel {
+
+    0% {
+
+        transform: scale(1);
+
+        filter: blur(0);
+    }
+
+
+    30% {
+
+        transform: scale(1.3);
+
+        filter: blur(0);
+    }
+
+
+    50% {
+
+        transform: scale(2);
+
+        filter: blur(1px);
+    }
+
+
+    70% {
+
+        transform: scale(3.5);
+
+        filter: blur(4px);
+    }
+
+
+    85% {
+
+        transform: scale(6);
+
+        filter: blur(9px);
+    }
+
+
+    100% {
+
+        transform: scale(12);
+
+        filter: blur(20px);
+    }
+}
+
+
+/* ========================================
+   OBJECTS RUSH
+   ======================================== */
+
+@keyframes objectsRush {
+
+    0% {
+
+        transform: scale(1);
+
+        filter: blur(0);
+    }
+
+
+    30% {
+
+        transform: scale(1.2);
+
+        filter: blur(0);
+    }
+
+
+    50% {
+
+        transform: scale(1.8);
+
+        filter: blur(1px);
+    }
+
+
+    70% {
+
+        transform: scale(3);
+
+        filter: blur(4px);
+    }
+
+
+    85% {
+
+        transform: scale(7);
+
+        filter: blur(10px);
+    }
+
+
+    100% {
+
+        transform: scale(15);
+
+        filter: blur(25px);
+    }
+}
+
+
+/* ========================================
+   LIGHT-SPEED FLASH
+   ======================================== */
+
+@keyframes lightWarp {
+
+    0% {
+
+        opacity: 0;
+
+        transform: scale(0);
+
+        filter: blur(0);
+    }
+
+
+    30% {
+
+        opacity: 0.05;
+
+        transform: scale(0.3);
+
+        filter: blur(0);
+    }
+
+
+    50% {
+
+        opacity: 0.2;
+
+        transform: scale(1);
+
+        filter: blur(1px);
+    }
+
+
+    70% {
+
+        opacity: 0.45;
+
+        transform: scale(4);
+
+        filter: blur(3px);
+    }
+
+
+    85% {
+
+        opacity: 0.8;
+
+        transform: scale(10);
+
+        filter: blur(7px);
+    }
+
+
+    95% {
+
+        opacity: 1;
+
+        transform: scale(20);
+
+        filter: blur(12px);
+
+        background: white;
+    }
+
+
+    100% {
+
+        opacity: 1;
+
+        transform: scale(30);
+
+        filter: blur(20px);
+
+        background: white;
+    }
+}
+
+
+    </style>
+
+
+    <script>
+
+        function travelTo(page, button) {
+
+            /*
+             * Get the exact position
+             * of the clicked button.
+             */
+            const rect = button.getBoundingClientRect();
+
+
+            /*
+             * Find the center of the button.
+             */
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+
+
+            /*
+             * Make the camera zoom toward
+             * the clicked button.
+             */
+            document.body.style.transformOrigin =
+                `${x}px ${y}px`;
+
+
+            /*
+             * Start the travelling animation.
+             */
+            document.body.classList.add("travelling");
+
+
+            /*
+             * Wait until the animation finishes,
+             * then change the page.
+             */
+            setTimeout(() => {
+
+                window.location.href = page;
+
+            }, 1200);
+
+        }
+
+    </script>
+
+</body>
+
+</html>
