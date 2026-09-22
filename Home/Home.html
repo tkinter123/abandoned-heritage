@@ -2,490 +2,1125 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Home page</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-</head>
-
-<body>
-
-    <!-- BUTTON 1 -->
-    <button
-        class="button1"
-        onclick="travelTo('../Deep Space/Deep Space.html', this)">
-        CLICK ME
-    </button>
-
-
-    <!-- BUTTON 2 -->
-    <button
-        class="button2"
-        onclick="travelTo('../Mars/Mars.html', this)">
-        CLICK ME
-    </button>
-
-
-    <!-- BUTTON 3 -->
-    <button
-        class="button3"
-        onclick="travelTo('../Moon/Moon.html', this)">
-        CLICK ME
-    </button>
-
-
-    <!-- Light-speed effect -->
-    <div class="light-transition"></div>
+    <title>Space Journey</title>
 
 
     <style>
 
         /* ========================================
-   RESET
-   ======================================== */
+           RESET
+        ======================================== */
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
 
-/* ========================================
-   PAGE
-   ======================================== */
+        /* ========================================
+           PAGE
+        ======================================== */
 
-html,
-body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
+        html,
+        body {
 
+            width: 100%;
+            height: 100%;
 
-/* ========================================
-   BACKGROUND
-   ======================================== */
+            overflow: hidden;
 
-body {
+        }
 
-    background-image: url("Background5.jpeg");
 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+        body {
 
-    position: relative;
+            position: relative;
 
-    /*
-     * JavaScript changes this dynamically
-     * to the clicked button's position.
-     */
-    transform-origin: center;
-}
+            background-image:
+                url("Background5.jpeg");
 
+            background-size: cover;
 
-/* ========================================
-   COMMON BUTTON STYLE
-   ======================================== */
+            background-position: center;
 
-.button1,
-.button2,
-.button3 {
+            background-repeat: no-repeat;
 
-    position: absolute;
+            font-family:
+                "Times New Roman",
+                Times,
+                serif;
 
-    height: 30px;
-    width: 80px;
+        }
 
-    font-family: "Times New Roman", Times, serif;
-    color: aliceblue;
 
-    background-color: purple;
+        /* ========================================
+           DARK SPACE OVERLAY
+        ======================================== */
 
-    border: 2px solid purple;
-    border-radius: 20%;
+        body::before {
 
-    filter: drop-shadow(0 0 10px purple);
+            content: "";
 
-    cursor: pointer;
+            position: fixed;
 
-    z-index: 10;
+            inset: 0;
 
-    transition:
-        transform 0.3s ease,
-        filter 0.3s ease;
-}
+            background:
+                radial-gradient(
+                    ellipse at center,
+                    transparent 0%,
+                    rgba(0,0,20,0.05) 35%,
+                    rgba(0,0,30,0.55) 100%
+                );
 
+            pointer-events: none;
 
-/* ========================================
-   BUTTON 1 POSITION
-   ======================================== */
+            z-index: 1;
 
-.button1 {
+        }
 
-    top: 465px;
-    left: 645px;
-}
 
+        /* ========================================
+           BUTTONS
+        ======================================== */
 
-/* ========================================
-   BUTTON 2 POSITION
-   ======================================== */
+        .button1,
+        .button2,
+        .button3 {
 
-.button2 {
+            position: absolute;
 
-    top: 469px;
-    left: 275px;
-}
+            width: 90px;
 
+            height: 32px;
 
-/* ========================================
-   BUTTON 3 POSITION
-   ======================================== */
+            color: white;
 
-.button3 {
+            font-family:
+                "Times New Roman",
+                Times,
+                serif;
 
-    top: 469px;
-    left: 1020px;
-}
+            font-size: 14px;
 
+            background:
+                linear-gradient(
+                    135deg,
+                    #40106d,
+                    #8a2be2
+                );
 
-/* ========================================
-   BUTTON HOVER
-   ======================================== */
+            border:
+                2px solid
+                rgba(210,170,255,0.9);
 
-.button1:hover,
-.button2:hover,
-.button3:hover {
+            border-radius: 20px;
 
-    transform: scale(1.15);
+            cursor: pointer;
 
-    filter: drop-shadow(0 0 18px purple);
-}
+            z-index: 10;
 
+            box-shadow:
+                0 0 8px #8a2be2,
+                0 0 20px #6a1bb1;
 
-/* ========================================
-   LIGHT TRANSITION
-   ======================================== */
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
 
-.light-transition {
+        }
 
-    position: fixed;
 
-    inset: 0;
+        .button1 {
+            top: 465px;
+            left: 645px;
+        }
 
-    z-index: 9999;
 
-    pointer-events: none;
+        .button2 {
+            top: 469px;
+            left: 275px;
+        }
 
-    /*
-     * Bright purple/white light.
-     */
-    background:
-        radial-gradient(
-            circle at center,
-            white 0%,
-            #ffffff 3%,
-            #d580ff 8%,
-            #8a2be2 18%,
-            #4b0082 35%,
-            navy 90%
-            transparent 65%
-        );
 
-    opacity: 0;
+        .button3 {
+            top: 469px;
+            left: 1020px;
+        }
 
-    transform: scale(0);
 
-    transform-origin: center;
+        /* ========================================
+           BUTTON HOVER
+        ======================================== */
 
-    filter: blur(0);
-}
+        .button1:hover,
+        .button2:hover,
+        .button3:hover {
 
+            transform: scale(1.15);
 
-/* ========================================
-   TRAVELLING MODE
-   ======================================== */
+            box-shadow:
+                0 0 12px white,
+                0 0 25px #b65cff,
+                0 0 50px #8a2be2;
 
-body.travelling {
+        }
 
-    overflow: hidden;
 
-    /*
-     * The entire camera zooms forward.
-     */
-    animation:
-        cameraTravel 1.2s
-        cubic-bezier(0.7, 0, 1, 1)
-        forwards;
-}
+        /* ========================================
+           SPACE TRAVEL CANVAS
+        ======================================== */
 
+        #spaceTravel {
 
-/*
- * Make the objects rush toward
- * the camera as well.
- */
+            position: fixed;
 
-body.travelling > *:not(.light-transition) {
+            inset: 0;
 
-    animation:
-        objectsRush 1.2s
-        cubic-bezier(0.7, 0, 1, 1)
-        forwards;
-}
+            width: 100%;
+            height: 100%;
 
+            z-index: 1000;
 
-/*
- * Make the light expand.
- */
+            pointer-events: none;
 
-body.travelling .light-transition {
+            opacity: 0;
 
-    animation:
-        lightWarp 1.2s
-        cubic-bezier(0.7, 0, 1, 1)
-        forwards;
-}
+        }
 
 
-/* ========================================
-   CAMERA TRAVEL
-   ======================================== */
+        /* ========================================
+           ENERGY GLOW
+        ======================================== */
 
-@keyframes cameraTravel {
+        .energy {
 
-    0% {
+            position: fixed;
 
-        transform: scale(1);
+            left: 50%;
+            top: 50%;
 
-        filter: blur(0);
-    }
+            width: 10px;
+            height: 10px;
 
+            transform:
+                translate(-50%, -50%);
 
-    30% {
+            border-radius: 50%;
 
-        transform: scale(1.3);
+            z-index: 1001;
 
-        filter: blur(0);
-    }
+            pointer-events: none;
 
+            opacity: 0;
 
-    50% {
+            background:
+                white;
 
-        transform: scale(2);
+            box-shadow:
 
-        filter: blur(1px);
-    }
+                0 0 10px white,
 
+                0 0 30px #b86cff,
 
-    70% {
+                0 0 70px #8a2be2,
 
-        transform: scale(3.5);
+                0 0 130px #4b0082;
 
-        filter: blur(4px);
-    }
+        }
 
 
-    85% {
+        /* ========================================
+           OUTER SPACE VIGNETTE
+        ======================================== */
 
-        transform: scale(6);
+        .space-vignette {
 
-        filter: blur(9px);
-    }
+            position: fixed;
 
+            inset: 0;
 
-    100% {
+            z-index: 1002;
 
-        transform: scale(12);
+            pointer-events: none;
 
-        filter: blur(20px);
-    }
-}
+            opacity: 0;
 
+            background:
+                radial-gradient(
+                    ellipse at center,
+                    transparent 20%,
+                    rgba(0,0,30,0.15) 50%,
+                    rgba(0,0,0,0.8) 100%
+                );
 
-/* ========================================
-   OBJECTS RUSH
-   ======================================== */
+        }
 
-@keyframes objectsRush {
 
-    0% {
+        /* ========================================
+           FINAL WHITE FLASH
+        ======================================== */
 
-        transform: scale(1);
+        .flash {
 
-        filter: blur(0);
-    }
+            position: fixed;
 
+            inset: 0;
 
-    30% {
+            background: white;
 
-        transform: scale(1.2);
+            z-index: 1003;
 
-        filter: blur(0);
-    }
+            pointer-events: none;
 
+            opacity: 0;
 
-    50% {
+        }
 
-        transform: scale(1.8);
 
-        filter: blur(1px);
-    }
+        /* ========================================
+           TRAVEL MODE
+        ======================================== */
 
+        body.travelling #spaceTravel {
 
-    70% {
+            opacity: 1;
 
-        transform: scale(3);
+        }
 
-        filter: blur(4px);
-    }
 
+        body.travelling .energy {
 
-    85% {
+            animation:
+                energyPulse
+                5.5s
+                ease-in-out
+                forwards;
 
-        transform: scale(7);
+        }
 
-        filter: blur(10px);
-    }
 
+        body.travelling .space-vignette {
 
-    100% {
+            animation:
+                vignetteTravel
+                5.5s
+                ease-in-out
+                forwards;
 
-        transform: scale(15);
+        }
 
-        filter: blur(25px);
-    }
-}
 
+        body.travelling .flash {
 
-/* ========================================
-   LIGHT-SPEED FLASH
-   ======================================== */
+            animation:
+                finalFlash
+                5.5s
+                ease-in
+                forwards;
 
-@keyframes lightWarp {
+        }
 
-    0% {
 
-        opacity: 0;
+        /* ========================================
+           ENERGY PULSE
+        ======================================== */
 
-        transform: scale(0);
+        @keyframes energyPulse {
 
-        filter: blur(0);
-    }
+            0% {
 
+                opacity: 0;
 
-    30% {
+                width: 10px;
+                height: 10px;
 
-        opacity: 0.05;
+                box-shadow:
+                    0 0 10px white,
+                    0 0 30px #b86cff,
+                    0 0 70px #8a2be2;
 
-        transform: scale(0.3);
+            }
 
-        filter: blur(0);
-    }
+            15% {
 
+                opacity: 0.4;
 
-    50% {
+                width: 40px;
+                height: 40px;
 
-        opacity: 0.2;
+            }
 
-        transform: scale(1);
+            35% {
 
-        filter: blur(1px);
-    }
+                opacity: 0.7;
 
+                width: 100px;
+                height: 100px;
 
-    70% {
+                box-shadow:
+                    0 0 20px white,
+                    0 0 70px #b86cff,
+                    0 0 150px #8a2be2;
 
-        opacity: 0.45;
+            }
 
-        transform: scale(4);
+            55% {
 
-        filter: blur(3px);
-    }
+                opacity: 0.85;
 
+                width: 250px;
+                height: 250px;
 
-    85% {
+            }
 
-        opacity: 0.8;
+            75% {
 
-        transform: scale(10);
+                opacity: 1;
 
-        filter: blur(7px);
-    }
+                width: 600px;
+                height: 600px;
 
+            }
 
-    95% {
+            90% {
 
-        opacity: 1;
+                opacity: 1;
 
-        transform: scale(20);
+                width: 1400px;
+                height: 1400px;
 
-        filter: blur(12px);
+            }
 
-        background: white;
-    }
+            100% {
 
+                opacity: 1;
 
-    100% {
+                width: 3000px;
+                height: 3000px;
 
-        opacity: 1;
+                background: white;
 
-        transform: scale(30);
+                box-shadow: none;
 
-        filter: blur(20px);
+            }
 
-        background: white;
-    }
-}
+        }
 
+
+        /* ========================================
+           VIGNETTE
+        ======================================== */
+
+        @keyframes vignetteTravel {
+
+            0% {
+                opacity: 0;
+            }
+
+            25% {
+                opacity: 0.15;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            75% {
+                opacity: 0.6;
+            }
+
+            90% {
+                opacity: 0.8;
+            }
+
+            100% {
+                opacity: 1;
+            }
+
+        }
+
+
+        /* ========================================
+           FINAL FLASH
+        ======================================== */
+
+        @keyframes finalFlash {
+
+            0% {
+                opacity: 0;
+            }
+
+            75% {
+                opacity: 0;
+            }
+
+            88% {
+                opacity: 0.15;
+            }
+
+            94% {
+                opacity: 0.7;
+            }
+
+            97% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 1;
+            }
+
+        }
+
+
+        /* ========================================
+           HIDE PAGE DURING TRAVEL
+        ======================================== */
+
+        body.travelling > *:not(#spaceTravel):not(.energy):not(.space-vignette):not(.flash) {
+
+            animation:
+                pageBlur
+                5.5s
+                ease-in
+                forwards;
+
+        }
+
+
+        @keyframes pageBlur {
+
+            0% {
+
+                transform: scale(1);
+
+                filter: blur(0);
+
+                opacity: 1;
+
+            }
+
+            30% {
+
+                transform: scale(1.02);
+
+                filter: blur(0);
+
+                opacity: 1;
+
+            }
+
+            55% {
+
+                transform: scale(1.08);
+
+                filter: blur(1px);
+
+                opacity: 0.8;
+
+            }
+
+            75% {
+
+                transform: scale(1.2);
+
+                filter: blur(4px);
+
+                opacity: 0.5;
+
+            }
+
+            90% {
+
+                transform: scale(1.5);
+
+                filter: blur(10px);
+
+                opacity: 0.15;
+
+            }
+
+            100% {
+
+                transform: scale(2);
+
+                filter: blur(20px);
+
+                opacity: 0;
+
+            }
+
+        }
+
+
+        /* ========================================
+           MOBILE
+        ======================================== */
+
+        @media (max-width: 700px) {
+
+            .button1 {
+
+                top: 40%;
+                left: 20%;
+
+            }
+
+            .button2 {
+
+                top: 50%;
+                left: 20%;
+
+            }
+
+            .button3 {
+
+                top: 60%;
+                left: 20%;
+
+            }
+
+        }
 
     </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ======================================
+         DESTINATION BUTTONS
+    ======================================= -->
+
+    <button
+        class="button1"
+        onclick="
+            travelTo(
+                '../Deep Space/Deep Space.html',
+                this
+            )
+        "
+    >
+        DEEP SPACE
+    </button>
+
+
+    <button
+        class="button2"
+        onclick="
+            travelTo(
+                '../Mars/Mars.html',
+                this
+            )
+        "
+    >
+        MARS
+    </button>
+
+
+    <button
+        class="button3"
+        onclick="
+            travelTo(
+                '../Moon/Moon.html',
+                this
+            )
+        "
+    >
+        MOON
+    </button>
+
+
+    <!-- ======================================
+         SPACE TRAVEL CANVAS
+    ======================================= -->
+
+    <canvas id="spaceTravel"></canvas>
+
+
+    <!-- ======================================
+         EFFECT LAYERS
+    ======================================= -->
+
+    <div class="energy"></div>
+
+    <div class="space-vignette"></div>
+
+    <div class="flash"></div>
 
 
     <script>
 
+        /* ========================================
+           CANVAS
+        ======================================== */
+
+        const canvas =
+            document.getElementById(
+                "spaceTravel"
+            );
+
+        const ctx =
+            canvas.getContext("2d");
+
+
+        /* ========================================
+           CANVAS SIZE
+        ======================================== */
+
+        function resizeCanvas() {
+
+            canvas.width =
+                window.innerWidth;
+
+            canvas.height =
+                window.innerHeight;
+
+        }
+
+
+        resizeCanvas();
+
+
+        window.addEventListener(
+            "resize",
+            resizeCanvas
+        );
+
+
+        /* ========================================
+           STAR SYSTEM
+        ======================================== */
+
+        const stars = [];
+
+
+        const STAR_COUNT = 700;
+
+
+        /* ========================================
+           CREATE STAR
+        ======================================== */
+
+        function createStar() {
+
+            return {
+
+                x:
+                    (Math.random() - 0.5)
+                    * canvas.width,
+
+                y:
+                    (Math.random() - 0.5)
+                    * canvas.height,
+
+                z:
+                    Math.random()
+                    * canvas.width,
+
+                pz: 0
+
+            };
+
+        }
+
+
+        /* ========================================
+           INITIALIZE STARS
+        ======================================== */
+
+        function initializeStars() {
+
+            stars.length = 0;
+
+            for (
+                let i = 0;
+                i < STAR_COUNT;
+                i++
+            ) {
+
+                const star =
+                    createStar();
+
+                star.pz =
+                    star.z;
+
+                stars.push(star);
+
+            }
+
+        }
+
+
+        initializeStars();
+
+
+        /* ========================================
+           TRAVEL STATE
+        ======================================== */
+
+        let travelling = false;
+
+        let startTime = 0;
+
+        const TRAVEL_DURATION =
+            5500;
+
+
+        /* ========================================
+           DRAW STAR FIELD
+        ======================================== */
+
+        function drawStars(progress) {
+
+            ctx.clearRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+
+            const centerX =
+                canvas.width / 2;
+
+            const centerY =
+                canvas.height / 2;
+
+
+            /*
+             * Acceleration curve.
+             */
+
+            let speed;
+
+            if (progress < 0.2) {
+
+                speed =
+                    2 +
+                    progress * 15;
+
+            }
+
+            else if (progress < 0.5) {
+
+                speed =
+                    5 +
+                    progress * 45;
+
+            }
+
+            else if (progress < 0.75) {
+
+                speed =
+                    30 +
+                    progress * 120;
+
+            }
+
+            else {
+
+                speed =
+                    120 +
+                    progress * 300;
+
+            }
+
+
+            /*
+             * Draw every star.
+             */
+
+            for (const star of stars) {
+
+                star.pz =
+                    star.z;
+
+                star.z -= speed;
+
+
+                /*
+                 * Recycle stars after
+                 * they pass the camera.
+                 */
+
+                if (star.z < 1) {
+
+                    star.x =
+                        (Math.random() - 0.5)
+                        * canvas.width;
+
+                    star.y =
+                        (Math.random() - 0.5)
+                        * canvas.height;
+
+                    star.z =
+                        canvas.width;
+
+                    star.pz =
+                        star.z;
+
+                }
+
+
+                /*
+                 * Perspective projection.
+                 */
+
+                const sx =
+                    centerX +
+                    star.x /
+                    star.z *
+                    canvas.width;
+
+                const sy =
+                    centerY +
+                    star.y /
+                    star.z *
+                    canvas.width;
+
+
+                const px =
+                    centerX +
+                    star.x /
+                    star.pz *
+                    canvas.width;
+
+                const py =
+                    centerY +
+                    star.y /
+                    star.pz *
+                    canvas.width;
+
+
+                /*
+                 * Star size.
+                 */
+
+                const size =
+                    Math.max(
+                        0.5,
+                        (1 -
+                            star.z /
+                            canvas.width
+                        ) * 4
+                    );
+
+
+                /*
+                 * Star brightness.
+                 */
+
+                const alpha =
+                    Math.min(
+                        1,
+                        1 -
+                        star.z /
+                        canvas.width
+                    );
+
+
+                /*
+                 * Draw streak.
+                 */
+
+                ctx.beginPath();
+
+                ctx.moveTo(
+                    px,
+                    py
+                );
+
+                ctx.lineTo(
+                    sx,
+                    sy
+                );
+
+
+                ctx.strokeStyle =
+                    `rgba(
+                        210,
+                        190,
+                        255,
+                        ${alpha}
+                    )`;
+
+
+                ctx.lineWidth =
+                    size;
+
+
+                ctx.stroke();
+
+
+                /*
+                 * Bright star core.
+                 */
+
+                ctx.beginPath();
+
+                ctx.arc(
+                    sx,
+                    sy,
+                    size * 0.7,
+                    0,
+                    Math.PI * 2
+                );
+
+
+                ctx.fillStyle =
+                    `rgba(
+                        255,
+                        255,
+                        255,
+                        ${alpha}
+                    )`;
+
+
+                ctx.fill();
+
+            }
+
+        }
+
+
+        /* ========================================
+           ANIMATION LOOP
+        ======================================== */
+
+        function animateTravel(timestamp) {
+
+            if (!travelling) {
+                return;
+            }
+
+
+            const elapsed =
+                timestamp - startTime;
+
+
+            const progress =
+                Math.min(
+                    elapsed /
+                    TRAVEL_DURATION,
+                    1
+                );
+
+
+            drawStars(progress);
+
+
+            if (progress < 1) {
+
+                requestAnimationFrame(
+                    animateTravel
+                );
+
+            }
+
+        }
+
+
+        /* ========================================
+           START TRAVEL
+        ======================================== */
+
+        function startHyperspace() {
+
+            travelling = true;
+
+            startTime =
+                performance.now();
+
+            initializeStars();
+
+
+            requestAnimationFrame(
+                animateTravel
+            );
+
+        }
+
+
+        /* ========================================
+           TRAVEL FUNCTION
+        ======================================== */
+
         function travelTo(page, button) {
 
             /*
-             * Get the exact position
-             * of the clicked button.
+             * Prevent multiple clicks.
              */
-            const rect = button.getBoundingClientRect();
+
+            if (
+                document.body.classList.contains(
+                    "travelling"
+                )
+            ) {
+
+                return;
+
+            }
 
 
             /*
-             * Find the center of the button.
+             * Start the visual effect.
              */
-            const x = rect.left + rect.width / 2;
-            const y = rect.top + rect.height / 2;
+
+            document.body.classList.add(
+                "travelling"
+            );
 
 
             /*
-             * Make the camera zoom toward
-             * the clicked button.
+             * Disable buttons.
              */
-            document.body.style.transformOrigin =
-                `${x}px ${y}px`;
+
+            document.querySelectorAll(
+                "button"
+            ).forEach(
+                button => {
+
+                    button.disabled =
+                        true;
+
+                }
+            );
 
 
             /*
-             * Start the travelling animation.
+             * Start actual star travel.
              */
-            document.body.classList.add("travelling");
+
+            startHyperspace();
 
 
             /*
-             * Wait until the animation finishes,
-             * then change the page.
+             * Open destination after
+             * 5.5 seconds.
              */
-            setTimeout(() => {
 
-                window.location.href = page;
+            setTimeout(
+                () => {
 
-            }, 1200);
+                    window.location.href =
+                        page;
+
+                },
+                TRAVEL_DURATION
+            );
 
         }
 
